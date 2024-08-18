@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   Button,
@@ -23,10 +23,11 @@ const Register = () => {
   const navigate = useNavigate();
   const loggdin = JSON.parse(localStorage.getItem("loggdin"));
 
-  if (loggdin) {
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    if (loggdin) {
+      navigate("/");
+    }
+  }, [navigate, loggdin]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
