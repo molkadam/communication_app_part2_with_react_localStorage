@@ -39,8 +39,13 @@ const Register = () => {
   const validateForm = () => {
     const errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const nameRegex = /^[a-zA-Z ]*$/;
     if (!formData.fullName.trim()) {
       errors.fullName = "Full Name is required";
+    }
+
+    if (!nameRegex.test(formData.fullName)) {
+      errors.fullName = "Name is invalid";
     }
 
     let getUsers = JSON.parse(localStorage.getItem("users"));
