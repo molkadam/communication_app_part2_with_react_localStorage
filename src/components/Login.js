@@ -49,12 +49,18 @@ const Login = ({ handleLogin }) => {
       validationErrors.password = "Password is required";
     }
 
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    if (!Array.isArray(users)) {
+      users = [];
+      // Optional: Save the empty array back to localStorage if you want to initialize it
+      localStorage.setItem("users", JSON.stringify(users));
+    }
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("users"));
     const user = users.find(
       (user) => user.email === email && user.password === password
     );
